@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   resources :reviews
   resources :wishlists
   devise_for :users, controllers: {registrations: 'registrations'}
+
+  scope "/admin" do
+    resources :users
+  end
+  
   get '/bookings/confirm_booking'
   get '/bookings/cancel_booking'
   resources :rooms
