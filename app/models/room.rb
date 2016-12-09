@@ -1,5 +1,6 @@
 class Room < ActiveRecord::Base
 	
+	mount_uploader :photo, PhotoUploader
 	has_many :room_amenity
 	has_many :amenities , through: :room_amenity
 	has_many :room_type
