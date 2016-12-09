@@ -9,6 +9,7 @@ gem 'autoprefixer-rails'
 gem 'pry'
 gem 'wicked_pdf', '~> 1.1'
 gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-heroku'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: :development
 gem 'pg', group: :production
