@@ -34,6 +34,7 @@ class Booking < ActiveRecord::Base
 	end
 
 	def calculate_total
+		#binding.pry
 		self.total = (self.end_date - self.start_date).to_i * self.room.price * self.people
 	end
 
