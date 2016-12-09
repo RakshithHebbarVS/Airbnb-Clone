@@ -1,108 +1,218 @@
-<table>
-	<thead>
-		<th>Name : </th>
-		<th>Description : </th>
-		<th>City : </th>
-		<th>Location : </th>
-		<th>Price : </th>
-		<th>Accomodates : </th>
-		<th>BedRooms : </th>
-		<th>BathRooms : </th>
-		<th>Beds : </th>
-	</thead>
-	<tbody>
-		<td><%= @room.name %></td>
-		<td><%= @room.description %></td>
-		<td><%= @room.city.name %></td>
-		<td><%= @room.location.name %></td>
-		<td><%= @room.price %></td>
-		<td><%= @room.accomodates %></td>
-		<td><%= @room.bedrooms %></td>
-		<td><%= @room.bathrooms %></td>
-		<td><%= @room.beds %></td>
-	</tbody>
-</table>
+				<div class = "cover-img-container">
+					<%= image_tag(@room.photo.url, height:"400", width:"600") if @room.photo  %>
+				</div>
+				<div>
+					<h2>Rs.<%= @room.price %><small> PerNight</small></h2>
+				</div>
+
+<div class = "row">
+	<div class = "col-md-6">
+					<p><h1><%= @room.name %> </h1></p>
+					<p>
+					<h3><%= @room.description %>,<%= @room.location.name %>,<%= @room.city.name %></h3>
+					</p>
+					<hr/>
+					<p>
+						<h2>The Space</h2>
+						<h4>Accomodates : <span><%= @room.accomodates %></span>
+							       BedRooms : <span ><%= @room.bedrooms %></span></h4>    
+						<h4>BathRooms : <span><%= @room.bathrooms %> </span>
+						          Beds : <span><%= @room.beds %></span></h4>
+						<h4>Type of Room :
+						<% @room.types.each do |type| %>
+						<span><%= type.name %></span>
+						<%end%>
+						</h4>
+					</p>
+					<hr/>
+					<p>
+					<h2>Amenities</h2>
+					<% @room.amenities.each do |amenity| %>
+					<h4><%= amenity.name %></h4>
+					<%end%>
+					</p>
+					<hr/>
+					
+					<p>
+					<h2>Reviews</h2>
+					<h3>Average Rating : <%= @average_rating %></h3>
+					
+					<% @room_reviews.each do |review| %>
+					<h4><%= review.user.email %></h4>
+					<h4>Title :<%= review.title %></h4>
+					<h4>Comments : <%= review.body %></h4>
+					<h4>Rating :</b><%= review.rating %>/5</h4>
+							<% if can? :update, review %>
+					        <%= link_to 'Edit', edit_review_path(review) %>
+					        <%end%>
+					        <% if can? :destroy, review %>
+					        <%= link_to 'Delete', review, method: :delete, data: { confirm: 'Are you sure?' } %>
+					        <%end%>
+					
+					<%end%>
+								
+					</p>
+
+				
+			</div>
+	
+	<div class = "col-md-6">
+			<div>
+				<h2>Book this room </h2>
+			</div>
+			<% days = 0 %>
+			<% sum = 0 %>
+			<div class="thumbnail">
+				<%= form_for @booking do |f| %>
+				<%= f.label :Check_In %><br/>
+				<%= f.date_select :start_date %><br/>
+
+				<%= f.label :Check_out %><br/>
+				<%= f.date_select :end_date %><br/><br/>
+
+				<div class = "form-group">
+					<%= f.select :people,[1,2,3,4,5],{prompt: "Select Number of People"},{class:"form-control"} %><br/>
+				</div>
+
+				<%= f.hidden_field :room_id, value: @room.id %>
+
+				<%= f.submit "Check Price" ,class: "btn btn-info"%>
+
+				<% end %>
+
+				<% if params[:booking_id] %>
+					<br/><b><%= @booking_confirmed.total %> INR</b><br/><br/>
+				<% end %>
+			</div>
+			<div>
+				<h2>Save To Wishlist</h2>
+			</div>
+			<div class = "thumbnail">
+				<%= form_for @wishlist do |f| %>
+				<%= f.hidden_field :room_id, value: @room.id %>
+				<%= f.submit "Add To Wishlist" , class: "btn btn-info" %>					
+				<%end%>
+			</div>
+			<div>
+				<h2>Review this room</h2>
+			</div>
+			<div class="thumbnail">
+				<%= form_for @review do |f| %>
+				<%= f.hidden_field :room_id, value: @room.id %>
+				<div class = "form-group">
+					<%= f.label :review_title %>
+					<%= f.text_field :title %>
+				</div>
+				<div class = "form-group">
+					<%= f.label :Comments %>
+					<%= f.text_area :body %>
+				</div>
+				<div class = "form-group">
+				<%= f.label :Rating %><br/>
+					<label class = "radio-inline">
+						<%= f.radio_button :rating, '1' %>1
+					</label>
+					<label class="radio-inline">
+					 	<%= f.radio_button :rating, '2' %>2
+					</label>
+					<label class="radio-inline">
+					  <%= f.radio_button :rating, '3' %>3
+					</label>
+					<label class="radio-inline">
+					   <%= f.radio_button :rating, '4' %>4 
+					</label>
+					<label class = "radio-inline">
+						<%= f.radio_button :rating, '5' %>5
+					</label>
+				</div>
+				<%= f.submit "Submit Review",class: "btn btn-info" %>
+				<%end%>
+			</div>
+	</div>
+</div>
 
 
-<h4>Amenities</h4>
-<ol>
-<% @room.amenities.each do |amenity| %>
-<li><%= amenity.name %></li>
-<%end%>
-</ol>
-<h4>Type of Room</h4>
-<ul>
-<% @room.types.each do |type| %>
-<li><%= type.name %></li>
-<%end%>
-</ul>
 
 
 
 
 
+<% if user_signed_in? %>
 <% if current_user.role? "host" %>
-<ul>
-	<% @booking_months = @room.bookings.where('status != ?','cancel').group_by {|b| b.start_date.beginning_of_month} %>
-		<% @booking_months.sort.each do |k,v| %>
-		<b><%= k.strftime("%B") %> </b><br/><br/>
-		<% v.each do |booking| %>
-		<li>
-		<%= booking.start_date %> -- <%= booking.end_date %> -- <%= booking.people %>
-		<% if booking.status == 'pending' %> 
-		<% if can? :confirm_booking, booking  %>
-			<%= link_to "Confirm Booking" , bookings_confirm_booking_path(booking_id: booking.id) %>
-		<%end%>
-		<%end%>
-		<% if booking.status == 'pending' || booking.status == 'confirm' %>
-		<% if  can? :cancel_booking, booking  %>
-			<%= link_to "Cancel Booking" , bookings_cancel_booking_path(booking_id: booking.id), data:{confirm:"ARE you sure"}%>
-		<%end%>
-		<%end%>
-		
-		<p>Status :<%= booking.status %></p>
-		 </li>
-		<%end%>
-		<%end%>
-	</ul>
+	<div class = "row">
+		<div class = "page-header">
+		<h2>Listing Bookings
+			<small>Total Bookings: <%= @room.bookings.size %></small>
+		</h2>
+		</div>
+
+		<div>
+			<table class = "table table-bordered">
+				<thead>
+					<th>Sl.No</th>
+					<th>Check-In</th>
+					<th>Check-Out</th>
+					<th>People</th>
+					<th>Status</th>
+					<th colspan="2" class='text-center'>Actions</th>
+				</thead>
+
+				<tbody>
+					
+					<% @booking_months = @room.bookings.where('status != ?','cancel').group_by {|b| b.start_date.beginning_of_month} %>
+					<% @booking_months.sort.each do |k,v| %>
+					<% count =1 %>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><b><%= k.strftime("%B") %></b></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<% v.each do |booking| %>
+					<tr>
+						<td><%= count %></td>
+						<td><%= booking.start_date %></td>
+						<td><%= booking.end_date %></td>
+						<td><%= booking.people %></td>
+						<td><%= booking.status %></td>
+						<% if booking.status == 'pending' %> 
+						<% if can? :confirm_booking, booking  %>
+						<td><%= link_to bookings_confirm_booking_path(booking_id: booking.id),class: "btn btn-primary " do%>
+							<i class="glyphicon glyphicon-folder-open"></i> Confirm Booking<%end%>
+						</td>
+						<%end%>
+						<%else%>
+						<td></td>
+						<%end%>
+						
+
+						<% if booking.status == 'pending' || booking.status == 'confirm' %>
+						<% if  can? :cancel_booking, booking  %>
+							<td><%= link_to "Cancel Booking" , bookings_cancel_booking_path(booking_id: booking.id), data:{confirm:"ARE you sure"}%></td>
+						<%end%>
+						<%else%>
+						<td></td>
+						<%end%>
+						<%count += 1 %>
+						
+					</tr>
+					<%end%>
+
+					<%end%>
+				</tbody>
+
+
+			</table> 
+
+		</div> 
+
+
+	</div>
+
+
+<%end%>
 <%end%>
 
-
-
-<h2>Book this room </h2>
-<% days = 0 %>
-<% sum = 0 %>
-
-<%= form_for @booking do |f| %>
-<%= f.label :Check_In %><br/>
-<%= f.date_select :start_date %><br/>
-
-<%= f.label :Check_out %><br/>
-<%= f.date_select :end_date %><br/><br/>
-
-<%= f.label :People %><br/>
-<%= f.select :people,[1,2,3,4,5] %><br/>
-
-<%= f.hidden_field :room_id, value: @room.id %><br/>
-
-<%= f.submit "Check Price" %><br/><br/>
-
-<% end %>
-
-<% if params[:booking_id] %>
-	<br/><b><%= @booking_confirmed.total %> INR</b><br/><br/>
-<% end %>
-
-<%= form_for @wishlist do |f| %>
-<%= f.hidden_field :room_id, value: @room.id %>
-<%= f.submit "Add to wishlist"  %><br/>
-<%end%>
-
-<% if current_user.role? "guest" %>
-<%= link_to "See Rooms Booked by me", bookings_path %><br/>
-<%= link_to "See My wishlist", wishlists_path %><br/>
-<%end%>
-
-
-
-<%= link_to "Back",rooms_path %>

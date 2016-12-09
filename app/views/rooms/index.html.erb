@@ -3,27 +3,39 @@
 <%= link_to "Add room",new_room_path %>
 <%end%>
 
-<ul>
+
 <% @rooms.each do |room|%>
-<li>
 
-	<%= room.name %> -- 
-	<% if room.is_available %>Available - 
-	<% else %>Not Available - 
-	<%end%>
-	
-	<%= link_to "show",room_path(room)%>
+<div class = "thumbnail">
+	<div class = "row">
+	<div class = "col-md-9">
+		<%= image_tag(room.photo.url,height:"300", width:"600") if room.photo  %>
+	</div>
+	<div class = "col-md-3">
+			<div class = "caption">
+				<p><strong><%= room.name %></strong></p>
+				<% if room.is_available %>
+				<p>Available</p> 
+				<% else %>
+				<p>Not Available</p> 
+				<%end%>
+				
+				<%= link_to "show",room_path(room)%>
 
-	<% if can? :update, room %>
-		<%= link_to "edit",edit_room_path(room) %>
-	<%end%>
-	
-	<% if can? :destroy, room %>
-		<%= link_to "destroy" , room_path(room),method: :delete, data:{confirm:"ARE you sure"} %>
-	<% end %>
-</li>
+				<% if can? :update, room %>
+					<%= link_to "edit",edit_room_path(room) %>
+				<%end%>
+				
+				<% if can? :destroy, room %>
+					<p><%= link_to "destroy" , room_path(room),method: :delete, data:{confirm:"ARE you sure"} %></p>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+
 <%end%>
-</ul>
+
 
 
 

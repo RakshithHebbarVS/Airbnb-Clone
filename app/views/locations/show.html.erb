@@ -1,0 +1,44 @@
+
+
+<div class = "row">
+	<div class = "col-md-3">
+		<p id="notice"><%= notice %></p>
+
+		<p>
+		  <strong>City:</strong>
+		  <%= @location.city.name %>
+		</p>
+
+		<p>
+		  <strong>Location:</strong>
+		  <%= @location.name %>
+		</p>
+
+		<p>
+		  <strong>Address:</strong>
+		  <%= @location.address %>
+		</p>
+		
+	</div>
+
+	<div class = "col-md-9">
+		
+		<% @location.rooms.each do |room|%>
+		<div class = "thumbnail">
+			<div class = "row">
+				<div class = "col-md-6">
+					<%= image_tag(room.photo.url, height:"150", width:"300") if room.photo  %>
+				</div>
+				<div class = "col-md-3">
+					<div class = "caption">
+						<h3><%= room.name %></h3>
+						<p><strong>Price : </strong> <%= room.price %></p>
+						<p><%= link_to "See Room",room_path(room.id) %></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<%end%> 
+		
+	</div>
+</div>

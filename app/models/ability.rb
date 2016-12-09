@@ -29,7 +29,10 @@ class Ability
         can [:create,:read], Booking
         can :read, Room
         can :manage, Wishlist
-    
+        can [:create, :read], Review 
+        can [:update,:destroy], Review do |review|
+            review.try(:user) == user
+        end    
     end 
     # Define abilities for the passed in user here. For example:
     #

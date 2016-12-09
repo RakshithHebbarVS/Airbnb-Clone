@@ -22,9 +22,7 @@ class Booking < ActiveRecord::Base
 
 	def is_available
 		bookings = Booking.where('room_id = ? AND end_date>= ? ',self.room_id, Date.today )
-		binding.pry
 		bookings.each do |booking|
-			#binding.pry
 			if self.start_date >= booking.start_date && self.start_date <= booking.end_date && (booking.status == 'pending' || booking.status == 'confirm') 
 				errors.add(:start_date,"Room already booked")
 			elsif self.end_date >= booking.start_date && self.end_date <= booking.end_date && (booking.status == 'pending' || booking.status == 'confirm')

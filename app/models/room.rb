@@ -1,5 +1,6 @@
 class Room < ActiveRecord::Base
 	
+	mount_uploader :photo, PhotoUploader
 	belongs_to :city
 	belongs_to :location
 	belongs_to :space
@@ -10,6 +11,7 @@ class Room < ActiveRecord::Base
 	belongs_to :user
 	has_many :bookings
 	has_many :wishlists
+	has_many :reviews
 	
 	
 end

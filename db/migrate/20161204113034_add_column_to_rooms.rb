@@ -1,5 +1,5 @@
 class AddColumnToRooms < ActiveRecord::Migration
   def change
-    add_column :rooms, :user_id, :integer
+    add_column :rooms, :rooms, :string
   end
 end

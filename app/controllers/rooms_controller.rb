@@ -26,6 +26,16 @@ class RoomsController < ApplicationController
 			@room = Room.find(params[:id])
 			@booking = Booking.new
 			@wishlist = Wishlist.new
+			@review = Review.new
+			@room_reviews = Review.where('room_id=?',@room.id)
+			sum = 0
+			@room_reviews.each do |review|
+				sum += review.rating
+			end
+			
+			if  !@room_reviews.empty?
+				@average_rating = sum / @room_reviews.count
+			end
 
 			if params[:booking_id]
 				@booking_confirmed = Booking.find(params[:booking_id])
@@ -59,7 +69,7 @@ class RoomsController < ApplicationController
     private
 
     def room_params
-    	params[:room].permit(:name,:location_id,:city_id,:description,:is_available,:accomodates,:bathrooms,:bedrooms,:beds,:type_ids,:price, amenity_ids: [])
+    	params[:room].permit(:name,:location_id,:city_id,:description,:is_available,:accomodates,:bathrooms,:bedrooms,:beds,:type_ids,:price,:photo, amenity_ids: [])
     end
 
 

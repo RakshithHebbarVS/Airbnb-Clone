@@ -32,7 +32,7 @@ class WishlistsController < ApplicationController
       redirect_to wishlists_path, notice: "Already in wishlist"
     else
       @wishlist.save
-      redirect_to wishlists_path, notice: "Added to wishlist"
+      redirect_to room_path(@wishlist.room_id), notice: "Added to wishlist"
     end
 
     

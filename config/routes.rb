@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :locations
+  resources :locations
+  resources :cities
+  resources :cities
+  resources :cities
+  resources :cities
   resources :reviews
   resources :wishlists
   devise_for :users, controllers: {registrations: 'registrations'}
