@@ -9,8 +9,9 @@
 	<div class = "col-md-6">
 					<p><h1><%= @room.name %> </h1></p>
 					<p>
-					<h3><%= @room.description %>,<%= @room.location.name %>,<%= @room.city.name %></h3>
+					<h4><%= @room.location.name %>,<%= @room.city.name %></h4>
 					</p>
+					<p><h5><%= @room.description %></h5></p>
 					<hr/>
 					<p>
 						<h2>The Space</h2>
@@ -84,15 +85,16 @@
 					<br/><b><%= @booking_confirmed.total %> INR</b><br/><br/>
 				<% end %>
 			</div>
-			<div>
+			<div class="thumbnail">
 				<h2>Save To Wishlist</h2>
-			</div>
-			<div class = "thumbnail">
 				<%= form_for @wishlist do |f| %>
 				<%= f.hidden_field :room_id, value: @room.id %>
-				<%= f.submit "Add To Wishlist" , class: "btn btn-info" %>					
+				<%= button_tag " ", type: 'submit', class: "btn btn-info " do %>
+				<i class="glyphicon glyphicon-heart"></i> Save to Wishlist
+				<%end%>
 				<%end%>
 			</div>
+			
 			<div>
 				<h2>Review this room</h2>
 			</div>
@@ -191,7 +193,10 @@
 
 						<% if booking.status == 'pending' || booking.status == 'confirm' %>
 						<% if  can? :cancel_booking, booking  %>
-							<td><%= link_to "Cancel Booking" , bookings_cancel_booking_path(booking_id: booking.id), data:{confirm:"ARE you sure"}%></td>
+							<td><%= link_to  bookings_cancel_booking_path(booking_id: booking.id), data:{confirm:"ARE you sure"},
+							class: "btn btn-danger" do%>
+							<i class="glyphicon glyphicon-trash"></i> Cancel Booking<%end%>
+							</td>
 						<%end%>
 						<%else%>
 						<td></td>
