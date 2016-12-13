@@ -1,0 +1,47 @@
+
+		<h2>Listing Bookings
+			<small>Total Bookings: <%= @room.bookings.size %></small>
+		</h2>
+		
+
+		
+		<% @booking_months = @room.bookings.where('status != ?','cancel').group_by {|b| b.start_date.beginning_of_month} %>
+					<% @booking_months.sort.each do |k,v| %>
+				<br/>	
+			<table border="1">
+			<b><%= k.strftime("%B") %></b>
+				<thead>
+					<th>Sl.No</th>
+					<th>Check-In</th>
+					<th>Check-Out</th>
+					<th>People</th>
+					<th>Status</th>
+				</thead>
+
+				<tbody>
+					
+					
+					<% count =1 %>
+					<% v.each do |booking| %>
+					<tr>
+						<td><%= count %></td>
+						<td><%= booking.start_date %></td>
+						<td><%= booking.end_date %></td>
+						<td><%= booking.people %></td>
+						<td><%= booking.status %></td>
+						
+						
+						
+						<%count += 1 %>
+						
+					</tr>
+					<%end%>
+
+					
+				</tbody>
+
+
+			</table> 
+			<%end%>
+
+		

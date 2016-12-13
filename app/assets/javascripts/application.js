@@ -12,5 +12,50 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+// require turbolinks
 //= require_tree .
+
+$(document).ready(function(){
+	$( "#start_date " ).datepicker(
+	{
+		"dateFormat" : "yy-mm-dd",
+		showOtherMonths: true,
+        selectOtherMonths: true,	
+        showButtonPanel: true,
+        changeMonth: true,
+      	changeYear: true,
+      	 showOn: "button",
+      buttonImage: "https://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+      buttonImageOnly: true,
+      buttonText: "Select date",
+      minDate: -0
+	});
+
+	$( "#end_date " ).datepicker(
+	{
+		"dateFormat" : "yy-mm-dd",
+		showOtherMonths: true,
+      	selectOtherMonths: true,
+      	showButtonPanel: true,
+      	changeMonth: true,
+      	changeYear: true,
+      	 showOn: "button",
+      buttonImage: "https://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+      buttonImageOnly: true,
+      buttonText: "Select date",
+      minDate: -0	
+	});
+
+	$( "#start_date" ).on( "change", function() {
+      $( "#start_date" ).datepicker( "option", "showAnim", $( clip ).val() );
+    });
+
+    $( "input" ).checkboxradio();
+
+	
+
+	
+
+
+
+});

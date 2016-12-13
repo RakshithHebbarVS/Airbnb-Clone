@@ -1,3 +1,4 @@
+
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -27,7 +28,7 @@
 
   <div class="field">
     <%= label_tag %><br/>
-    <%= select_tag :"user[role_ids][]", options_for_select(Role.last(3).collect{|u|[u.name,u.id]}) %> 
+    <%= select_tag :"user[role_ids][]", options_for_select(Role.last(2).collect{|u|[u.name,u.id]}) %> 
   </div>
 
   <div class="actions">

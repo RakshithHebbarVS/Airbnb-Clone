@@ -65,11 +65,15 @@
 			<% sum = 0 %>
 			<div class="thumbnail">
 				<%= form_for @booking do |f| %>
-				<%= f.label :Check_In %><br/>
-				<%= f.date_select :start_date %><br/>
-
-				<%= f.label :Check_out %><br/>
-				<%= f.date_select :end_date %><br/><br/>
+				<div class="form-group">
+					<%= f.label :Check_In %>
+					<%= f.text_field :start_date, id: "start_date",class: "form-control" %>
+				</div>
+ 
+				<div class="form-group">
+					<%= f.label :Check_out %>
+					<%= f.text_field :end_date, id: "end_date",class: "form-control" %>
+				</div>
 
 				<div class = "form-group">
 					<%= f.select :people,[1,2,3,4,5],{prompt: "Select Number of People"},{class:"form-control"} %><br/>
@@ -145,11 +149,20 @@
 		<div class = "page-header">
 		<h2>Listing Bookings
 			<small>Total Bookings: <%= @room.bookings.size %></small>
+			<span><%= link_to room_path(@room.id, format: :pdf),class: "btn btn-info" do%>
+			<i class="glyphicon glyphicon-save"></i> Generate PDF
+			<%end%>
+			</span>
 		</h2>
 		</div>
 
+        
 		<div>
+		<% @booking_months = @room.bookings.where('status != ?','cancel').group_by {|b| b.start_date.beginning_of_month} %>
+					<% @booking_months.sort.each do |k,v| %>
+					
 			<table class = "table table-bordered">
+			<b><%= k.strftime("%B") %></b>
 				<thead>
 					<th>Sl.No</th>
 					<th>Check-In</th>
@@ -161,18 +174,8 @@
 
 				<tbody>
 					
-					<% @booking_months = @room.bookings.where('status != ?','cancel').group_by {|b| b.start_date.beginning_of_month} %>
-					<% @booking_months.sort.each do |k,v| %>
+					
 					<% count =1 %>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td><b><%= k.strftime("%B") %></b></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
 					<% v.each do |booking| %>
 					<tr>
 						<td><%= count %></td>

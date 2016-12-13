@@ -41,7 +41,15 @@ class RoomsController < ApplicationController
 				@booking_confirmed = Booking.find(params[:booking_id])
 			end
 
+			respond_to do |format|
+			format.html
+			format.pdf do
+			render pdf: "rooms"
+			end
+			end
+
 	end
+
 
 	def edit
 		begin
