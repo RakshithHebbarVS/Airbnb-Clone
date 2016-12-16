@@ -1,40 +1,44 @@
-<h3>Listing Rooms</h3>
-<% if can? :create, Room.new %> 
-<%= link_to "Add room",new_room_path %>
-<%end%>
-
-
+<div class="jumbotron text-center">
+	<h3>Rooms</h3>
+	<% if can? :create, Room.new %> 
+		<%= link_to "Add room",new_room_path ,class: "btn btn-default"%>
+	<%end%>
+</div>
+<div class="row">
 <% @rooms.each do |room|%>
-
-<div class = "thumbnail">
-	<div class = "row">
-	<div class = "col-md-9">
-		<%= image_tag(room.photo.url, height:"400", width:"600") if room.photo  %>
-	</div>
-	<div class = "col-md-3">
-			<div class = "caption">
-				<p><strong><%= room.name %></strong></p>
-				<% if room.is_available %>
-				<p>Available</p> 
-				<% else %>
-				<p>Not Available</p> 
-				<%end%>
+	<div class="col-md-3">
+			<div class = "card">
 				
-				<%= link_to "show",room_path(room)%>
-
-				<% if can? :update, room %>
-					<%= link_to "edit",edit_room_path(room) %>
-				<%end%>
 				
-				<% if can? :destroy, room %>
-					<p><%= link_to "destroy" , room_path(room),method: :delete, data:{confirm:"ARE you sure"} %></p>
-				<% end %>
+					<%= link_to image_tag(room.photo.url, height:"200", width:"100%"),room_path(room) , target: "_blank"  %>
+				
+				
+						<div class = "card-padding">
+							<p><strong><%= room.name %></strong></p>
+							<p>₹<%= room.price %></p> 
+							<% if room.is_available %>
+							<p>Available</p> 
+							<% else %>
+							<p>Not Available</p> 
+							<%end%>
+							
+							<%= link_to "See Room" ,room_path(room)%>
+							
+
+							<% if can? :update, room %>
+								<%= link_to "edit",edit_room_path(room) %>
+							<%end%>
+							
+							<% if can? :destroy, room %>
+								<%= link_to "destroy" , room_path(room),method: :delete, data:{confirm:"ARE you sure"} %>
+							<% end %>
+						</div>
+				</div>
 			</div>
-		</div>
-	</div>
+		<%end%>
 </div>
 
-<%end%>
+<hr/>
 
 
 

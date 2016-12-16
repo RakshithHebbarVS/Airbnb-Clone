@@ -1,17 +1,36 @@
-				<div class = "cover-img-container">
-					<%= image_tag(@room.photo.url, height:"400", width:"600") if @room.photo  %>
+	<div class = "row">
+				<div class= "col-md-8" >
+					<%= image_tag(@room.photo.url, height:"500", width:"100%") if @room.photo  %>
 				</div>
-				<div>
-					<h2>Rs.<%= @room.price %><small> PerNight</small></h2>
+				
+					<div class= "col-md-4">
+						<div class = "jumbotron">
+							<h2>Save To Wishlist</h2>
+							<%= form_for @wishlist do |f| %>
+							<%= f.hidden_field :room_id, value: @room.id %>
+							<%= button_tag "", type: 'submit', class: "btn btn-large btn-default " do %>
+							<i class="glyphicon glyphicon-heart"></i> Save to wishlist
+							<%end%>
+							<%end%>
+							
+					</div>
 				</div>
+	</div>
 
 <div class = "row">
 	<div class = "col-md-6">
-					<p><h1><%= @room.name %> </h1></p>
-					<p>
-					<h4><%= @room.location.name %>,<%= @room.city.name %></h4>
-					</p>
-					<p><h5><%= @room.description %></h5></p>
+					<div>
+						<h2>Rs.<%= @room.price %><small> PerNight</small></h2>
+					</div>
+					<div>
+						<h3><strong><%= @room.name %></strong></h3>
+					</div>
+					<div>
+						<h4><%= @room.location.name %>,<%= @room.city.name %></h4>
+					</div>
+					<div>
+						<p><%= @room.description %></p>
+					</div>
 					<hr/>
 					<p>
 						<h2>The Space</h2>
@@ -64,21 +83,26 @@
 			<% days = 0 %>
 			<% sum = 0 %>
 			<div class="thumbnail">
+
+
 				<%= form_for @booking do |f| %>
 				<div class="form-group">
 					<%= f.label :Check_In %>
-					<%= f.text_field :start_date, id: "start_date",class: "form-control" %>
+					<%= f.text_field :start_date, id: "startDate",class: "form-control" %>
 				</div>
  
 				<div class="form-group">
 					<%= f.label :Check_out %>
-					<%= f.text_field :end_date, id: "end_date",class: "form-control" %>
+					<%= f.text_field :end_date, id: "endDate",class: "form-control" %>
 				</div>
 
 				<div class = "form-group">
-					<%= f.select :people,[1,2,3,4,5],{prompt: "Select Number of People"},{class:"form-control"} %><br/>
-				</div>
+					<%= f.label "Guests: " %>
+					<%= f.select :people,[1,2,3,4,5],{class:"form-control"} %><br/>
 
+				</div>
+				
+				
 				<%= f.hidden_field :room_id, value: @room.id %>
 
 				<%= f.submit "Check Price" ,class: "btn btn-info"%>
@@ -89,20 +113,13 @@
 					<br/><b><%= @booking_confirmed.total %> INR</b><br/><br/>
 				<% end %>
 			</div>
-			<div class="thumbnail">
-				<h2>Save To Wishlist</h2>
-				<%= form_for @wishlist do |f| %>
-				<%= f.hidden_field :room_id, value: @room.id %>
-				<%= button_tag " ", type: 'submit', class: "btn btn-info " do %>
-				<i class="glyphicon glyphicon-heart"></i> Save to Wishlist
-				<%end%>
-				<%end%>
-			</div>
+			
 			
 			<div>
 				<h2>Review this room</h2>
 			</div>
 			<div class="thumbnail">
+				<%= render 'js'%>
 				<%= form_for @review do |f| %>
 				<%= f.hidden_field :room_id, value: @room.id %>
 				<div class = "form-group">
@@ -221,6 +238,8 @@
 	</div>
 
 
+
 <%end%>
 <%end%>
+
 

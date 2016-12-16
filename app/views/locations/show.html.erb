@@ -1,7 +1,7 @@
 
 
-<div class = "row">
-	<div class = "col-md-3">
+
+	<div>
 		<p id="notice"><%= notice %></p>
 
 		<p>
@@ -21,24 +21,22 @@
 		
 	</div>
 
-	<div class = "col-md-9">
-		
+	
+		<div class = "row">
 		<% @location.rooms.each do |room|%>
-		<div class = "thumbnail">
-			<div class = "row">
-				<div class = "col-md-6">
-					<%= image_tag(room.photo.url, height:"150", width:"300") if room.photo  %>
-				</div>
 				<div class = "col-md-3">
-					<div class = "caption">
-						<h3><%= room.name %></h3>
-						<p><strong>Price : </strong> <%= room.price %></p>
+					<div class = "card">
+					<%= link_to image_tag(room.photo.url, height:"200", width:"100%"),room_path(room) , target: "_blank"  %>
+					
+				
+					<div class = "card-padding">
+						<p><strong><%= room.name %></strong></p>
+						<p><strong>Price : </strong> ₹ <%= room.price %></p>
 						<p><%= link_to "See Room",room_path(room.id) %></p>
 					</div>
 				</div>
 			</div>
-		</div>
+		
 		<%end%> 
 		
 	</div>
-</div>

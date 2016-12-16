@@ -112,12 +112,20 @@
       			<ul class="nav navbar-nav navbar-right">
       				<li><%= link_to "Login", "#", data: {toggle: "modal", target: "#myModal"} %></li>
 					<li><%= link_to "Register", "#",data: {toggle: "modal", target: "#myRegister"} %></li>
-				</ul>
-		    
-		      
+				</ul> 
 			</div>
-			
-			</nav>
+		</nav>
+
+		<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Login Details</strong>
+  <p>1.<strong>Admin,</strong>  username: admin@gmail.com
+  			  passwod : secret123</p>
+    <p> 2.<strong>Guest,</strong> username: guest@gmail.com
+     			password: secret123</p>
+     <p>3.<strong>Host,</strong> username : host@gmail.com
+     			password: secret123</p>
+</div>
 
 			<% end %>
 			
@@ -151,8 +159,8 @@
        	<%= render '/devise/sessions/login' %>
       </div>
       <div class="modal-footer">
+        Don't have an Account?<%= link_to "Register", "#",data: {toggle: "modal", target: "#myRegister",dismiss: "modal"},class: "btn btn-default" %>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -171,8 +179,8 @@
        	<%= render '/devise/registrations/registration' %>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        Already have an Account <%= link_to "Login","#", data: {toggle: "modal", target: "#myModal",dismiss: "modal"} ,class: "btn btn-default"%>
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
