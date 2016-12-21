@@ -7,6 +7,7 @@ gem 'rails', '4.2.6'
 gem 'autoprefixer-rails'
 #gem 'jquery-sliders-rails'
 #gem 'bootstrap-sass', '~> 3.3.6'
+
 gem 'pry'
 gem 'wicked_pdf', '~> 1.1'
 gem 'wkhtmltopdf-binary'
@@ -16,6 +17,7 @@ gem 'sqlite3', group: :development
 gem 'pg', group: :production
 gem 'rails_12factor', group: :production
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
+gem 'cloudinary'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

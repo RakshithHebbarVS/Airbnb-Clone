@@ -1,0 +1,18 @@
+development:
+  cloud_name: dll6czd9u
+  api_key: '423299678299477'
+  api_secret: Q5SwoAa2OES8U-SxbEpg0yFd3Dw
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: dll6czd9u
+  api_key: '423299678299477'
+  api_secret: Q5SwoAa2OES8U-SxbEpg0yFd3Dw
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: dll6czd9u
+  api_key: '423299678299477'
+  api_secret: Q5SwoAa2OES8U-SxbEpg0yFd3Dw
+  enhance_image_tag: true
+  static_image_support: false

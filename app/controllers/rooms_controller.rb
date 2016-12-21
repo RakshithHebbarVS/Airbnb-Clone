@@ -35,7 +35,15 @@ class RoomsController < ApplicationController
 			
 			if  !@room_reviews.empty?
 				@average_rating = sum / @room_reviews.count
-			end
+			endoom.user_id = current_user.id
+		if @room.save
+			redirect_to rooms_path , notice: "successfully created room"
+		else
+			render action: "new"
+		end
+	end
+
+	def show
 
 			if params[:booking_id]
 				@booking_confirmed = Booking.find(params[:booking_id])
