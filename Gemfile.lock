@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/carrierwaveuploader/carrierwave.git
+  revision: 61a961aedf29aa6741dc6528c55dfe6de7f700b4
+  specs:
+    carrierwave (1.1.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -46,10 +55,6 @@ GEM
     builder (3.2.2)
     byebug (9.0.6)
     cancancan (1.15.0)
-    carrierwave (1.0.0.rc)
-      activemodel (>= 4.0.0)
-      activesupport (>= 4.0.0)
-      mime-types (>= 1.16)
     cloudinary (1.2.4)
       aws_cf_signer
       rest-client
@@ -198,7 +203,7 @@ DEPENDENCIES
   autoprefixer-rails
   byebug
   cancancan
-  carrierwave (>= 1.0.0.rc, < 2.0)
+  carrierwave!
   cloudinary
   coffee-rails (~> 4.1.0)
   devise
@@ -220,4 +225,4 @@ DEPENDENCIES
   wkhtmltopdf-heroku
 
 BUNDLED WITH
-   1.12.4
+   1.15.1

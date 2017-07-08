@@ -16,7 +16,8 @@ gem 'wkhtmltopdf-heroku'
 gem 'sqlite3', group: :development
 gem 'pg', group: :production
 gem 'rails_12factor', group: :production
-gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
+gem 'carrierwave', github:'carrierwaveuploader/carrierwave'
+#gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
 gem 'cloudinary'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
