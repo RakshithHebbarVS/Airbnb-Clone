@@ -1,0 +1,30 @@
+# wkhtmltopdf-heroku
+
+Provides a [wkhtmltopdf](http://wkhtmltopdf.org/) binary for [Heroku](http://www.heroku.com/).
+
+Preconfigures [pdfkit](https://rubygems.org/gems/pdfkit), [wicked_pdf](https://rubygems.org/gems/wicked_pdf) and [wisepdf](http://rubygems.org/gems/wisepdf) to use this binary if they are loaded.
+
+## Usage
+
+In your `Gemfile`:
+
+```ruby
+  gem 'wkhtmltopdf-heroku'
+```
+
+### Current wkhtmltopdf Version: 0.12.3.0 Ubuntu Trusty 64-bit.
+
+For more details See wkhtmltopdf [Changelog](https://github.com/wkhtmltopdf/wkhtmltopdf/blob/master/CHANGELOG.md)
+
+### Supported Heroku Stack: [Cedar-14](https://devcenter.heroku.com/articles/cedar)
+
+See [migration guides](https://devcenter.heroku.com/articles/cedar-14-migration) for more details.
+
+### Contributors
+
+* @bradphelan
+* @pallymore
+
+### Copyright
+
+Copyright (c) 2011 Brad Phelan. See LICENSE.txt for further details.

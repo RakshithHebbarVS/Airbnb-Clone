@@ -6,7 +6,7 @@
 					<div class= "col-md-4">
 						<div class = "jumbotron">
 							<h2>Save To Wishlist</h2>
-							<%= form_for @wishlist do |f| %>
+							<%= form_for Wishlist.new do |f| %>
 							<%= f.hidden_field :room_id, value: @room.id %>
 							<%= button_tag "", type: 'submit', class: "btn btn-large btn-default " do %>
 							<i class="glyphicon glyphicon-heart"></i> Save to wishlist
@@ -56,7 +56,7 @@
 					<p>
 					<h2>Reviews</h2>
 					<h3>Average Rating : <%= @average_rating %></h3>
-					
+					<% if !@room_reviews.nil? %>
 					<% @room_reviews.each do |review| %>
 					<h4><%= review.user.email %></h4>
 					<h4>Title :<%= review.title %></h4>
@@ -70,7 +70,7 @@
 					        <%end%>
 					
 					<%end%>
-								
+					<%end%>				
 					</p>
 
 				
@@ -85,7 +85,7 @@
 			<div class="thumbnail">
 
 
-				<%= form_for @booking do |f| %>
+				<%= form_for Booking.new do |f| %>
 				<div class="form-group">
 					<%= f.label :Check_In %>
 					<%= f.text_field :start_date, id: "startDate",class: "form-control" %>
@@ -120,7 +120,7 @@
 			</div>
 			<div class="thumbnail">
 				<%= render 'js'%>
-				<%= form_for @review do |f| %>
+				<%= form_for Review.new do |f| %>
 				<%= f.hidden_field :room_id, value: @room.id %>
 				<div class = "form-group">
 					<%= f.label :review_title %>

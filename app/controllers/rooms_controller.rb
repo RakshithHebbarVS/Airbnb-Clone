@@ -24,9 +24,6 @@ class RoomsController < ApplicationController
 	def show
 			
 			@room = Room.find(params[:id])
-			@booking = Booking.new
-			@wishlist = Wishlist.new
-			@review = Review.new
 			@room_reviews = Review.where('room_id=?',@room.id)
 			sum = 0
 			@room_reviews.each do |review|
@@ -35,7 +32,8 @@ class RoomsController < ApplicationController
 			
 			if  !@room_reviews.empty?
 				@average_rating = sum / @room_reviews.count
-			endoom.user_id = current_user.id
+			end
+			room.user_id = current_user.id
 		if @room.save
 			redirect_to rooms_path , notice: "successfully created room"
 		else
