@@ -68,17 +68,11 @@ class RoomsController < ApplicationController
 
     def update
     	@room = Room.find(params[:id])
-    	logger.debug "===>124 params are #{params[:file].present?}===="
-	if params[:file].present?
-		logger.debug "===>2nd inside"
-  		preloaded = Cloudinary::PreloadedFile.new(params[:file])         
-  		raise "Invalid upload signature" if !preloaded.valid?
-  		logger.debug "===>124 preloaded is #{preloaded.inspect}===="
- 		@room.photo = preloaded.identifier
- 		logger.debug "===>124 inside image id is #{@model.photo.inspect}"
-	end
-
-
+		if params[:file].present?
+  			preloaded = Cloudinary::PreloadedFile.new(params[:file])         
+  			raise "Invalid upload signature" if !preloaded.valid?
+ 			@room.photo = preloaded.identifier
+		end
     	if @room.update_attributes(room_params)
     		redirect_to room_path(@room),notice: "successfully updated room"
     	else
