@@ -1,6 +1,6 @@
 	<div class = "row">
 				<div class= "col-md-8" >
-					<%= image_tag(@room.photo.url, height:"500", width:"100%") if @room.photo  %>
+					<%= image_tag (@room.photo.url.to_s) if @room.photo  %>
 				</div>
 				
 					<div class= "col-md-4">

@@ -32,6 +32,11 @@
 <%= f.label :beds %><br/>
 <%= f.number_field :beds %><br/>
 <%= f.label :photo %><br/>
-<%= f.file_field :photo %><br/>
+<%= f.file_field :photo %>
+<%# if f.object.photo? %>
+    <%#= image_tag f.object.photo.thumb.url %>
+    <%#= f.label :remove_image %>
+    <%#= f.check_box :remove_image %> 
+<%# end %>
 <%= f.submit %>
 <%end%>
